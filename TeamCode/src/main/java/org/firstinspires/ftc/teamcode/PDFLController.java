@@ -5,7 +5,11 @@ package org.firstinspires.ftc.teamcode;
  * the running of a PDF Controller, with an added lower limit, L, to prevent undercorrection
  * due to friction inherent in systems.
  *
- * @ author Asher Childress - 9161 Overlaod
+ * Ensure to make sure your motor's direction is properly reversed
+ * within the OpMode calling this controller.
+ *
+ * @author Asher Childress - 9161 Overlaod
+ * @author Noah Nottingham - 6566 Circuit Breakers
  */
 
 public class PDFLController {
@@ -16,6 +20,8 @@ public class PDFLController {
 
     private long time, oldTime;
 
+    public double dir;
+
     /**
      * Constructor for PDFLController.
      * @param p The proportional gain
@@ -23,7 +29,7 @@ public class PDFLController {
      * @param f The feedforward gain
      * @param l The lower limit of the controller
      */
-    public PDFLController(double p,double d,double f,double l) {
+    public PDFLController(double p, double d, double f, double l) {
         this.p = p;
         this.d = d;
         this.f = f;
@@ -34,10 +40,14 @@ public class PDFLController {
      * Runs the PDFL controller using the given position and target.
      * @return The output of the controller
      */
-    public double runPDFL() {
-        double returnVal = error*p + dError*d + f;
+    public double runPDFL(int errorMin) {
+        double returnVal = (error*p) + (dError*d);
+        dir = error > 0 ? 1 : error < 0 ? -1 : 0;
 
-        return Math.max(l, Math.abs(returnVal)) * returnVal/Math.abs(returnVal);
+        if (Math.abs(error) <= errorMin) return f;
+
+
+        return ((Math.max(Math.abs(l), Math.abs(returnVal))) * dir) + f;
     }
 
     /**
@@ -83,6 +93,13 @@ public class PDFLController {
      * @param l The lower limit
      */
     public void setL(double l) {this.l = l;}
+
+    public void setPDFL(double p, double d, double f, double l){
+        this.p = p;
+        this.d = d;
+        this.f = f;
+        this.l = l;
+    }
 
     /**
      * Gets the proportional gain of the controller.

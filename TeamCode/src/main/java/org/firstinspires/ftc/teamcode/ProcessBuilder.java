@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.ArrayList;
 
-public class ProcessBUilder {
+public class ProcessBuilder {
     private ArrayList<HardwareDevice> devices;
     private ArrayList<DcMotorEx> motors;
     private ArrayList<Servo> servos;
