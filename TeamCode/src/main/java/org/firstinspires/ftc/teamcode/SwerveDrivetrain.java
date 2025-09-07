@@ -24,12 +24,18 @@ public class SwerveDrivetrain extends OpMode {
   Servo frs;
   Servo fls;
   int targetPosition = 0;
-
+  int x = 0;
+  int y = 0;
+  ArrayList<Integer> vector2D = new ArrayList<Integer>(2);
 
 
   public static boolean robotCentric = false;
 
     public void init() {
+
+      vector2D.add(x);
+      vector2D.add(y);
+
       fr = hardwareMap.get(DcMotorEx.class, "fr");
       fl = hardwareMap.get(DcMotorEx.class, "fl");
       frs = hardwareMap.get(Servo.class, "frs");
