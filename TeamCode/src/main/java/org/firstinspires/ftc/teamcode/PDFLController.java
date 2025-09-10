@@ -8,7 +8,7 @@ package org.firstinspires.ftc.teamcode;
  * Ensure to make sure your motor's direction is properly reversed
  * within the OpMode calling this controller.
  *
- * @author Asher Childress - 9161 Overlaod
+ * @author Asher Childress - 9161 Overload
  * @author Noah Nottingham - 6566 Circuit Breakers
  */
 
